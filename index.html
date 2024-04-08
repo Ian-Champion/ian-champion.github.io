@@ -1,105 +1,141 @@
-<!doctype html>
-<html>
-<head>
-    <meta charset ="utf-8">
-    <title> Practice </title>
-    <link rel="shortcut icon" href="IMG/icon.png" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="css/style1.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
-    <script>function encrypt(){
-            
-         var encrypted = CryptoJS.AES.encrypt(document.getElementById("text").value, document.getElementById("pass").value);   
-            document.getElementById("result").innerHTML = encrypted;
-            document.getElementById("decrypted").innerHTML = '';
-        }        
-        
-        function decrypt(){
-         var decrypted = CryptoJS.AES.decrypt(document.getElementById("secret").value, document.getElementById("pass").value).toString(CryptoJS.enc.Utf8);
-            document.getElementById("decrypted").innerHTML = decrypted;
-            document.getElementById("result").innerHTML = '';
-        }
-    </script>
-    <script>
-        function myFunction() {
-          var x = document.getElementById("pass");
-          if (x.type === "password") {
-            x.type = "text";
-          } else {
-            x.type = "password";
-          }
-        }
-        </script>
-        <script>
-          function alerting(){
-            alert("⭐ Please checkout the Home page to watch the small animation video for better understanding");
-          }
-          </script>
-    <script>(
-function(w, d) 
-{ 
-w.CollectId = "5f87ee645e14474e07fc4438"; 
-var h = d.head || d.getElementsByTagName("head")[0]; 
-var s = d.createElement("script"); 
-s.setAttribute("type", "text/javascript"); 
-s.async=true;
- s.setAttribute("src", "https://collectcdn.com/launcher.js");
- h.appendChild(s); })
-(window, document);
-</script>
-</head>
-<body>
-   <header>
-    <div id="header-container">
-       <div class="col-3">
-        <img src="IMG/images.jpg" height="80" width="160">
-        </div>
-       <div class="col-4">
-        <nav>
-          <ul class="menu">
-           <a href="/home&aboutus/home.html" style="text-decoration: none"><li> Home </li></a>
-           <a href="/home&aboutus/practice.html" style="text-decoration: none"><li style="color: rgb(252, 206, 4);"> Practice </li></a>
-           <a href="/home&aboutus/encrypt-decrypt.html" style="text-decoration: none"><li> Encryption/Decryption </li></a>
-           <a href="/about us/index.html" style="text-decoration: none"><li> About Us </li></a>
-           </ul>
-          </nav>
-        </div>
-        <div class="col-3">
-        <a href=""  onclick="alerting()" class="getStartedBIN">Why To Use Coded The Doc?</a>
-        </div>
-       </div>
-    </header>
-    <div class="main-container">
-        <div id="top-section-main">
-            <div id="top-section-content">
-            <h1 style="color: rgb(217, 223, 223); font-size: 28px;">Encryption/Decryption Using AES On A Plain Text 📝</h1>
-            <p style="text-align: center; font-size: 23px; color: rgb(55, 233, 233);"> PRACTICE 🎯</p>
-     <div class="main-form">
-    <br><h4>ENTER SOME TEXT: <input id='text' type='text' placeholder='Enter some text to see the process🔮' style="width: 738px;"/>
+header
+{
+    height: 80px;
+    background-color: rgb(202, 162, 162);
+}
+#header-container
+{
+    width: 85%;
+    margin: auto;
+}
+.col-3
+{
+    width: 20%;
+    float: left;
+}
+.col-4
+{
+    width: 60%;
+    float: left;
+}
+body{
+    background-color: black;
+    margin: 0;
+}
+.menu li
+{
+    list-style-type: none;
+    display: inline;
+    font-size: 1.3em;
+    color: black;
+    padding-right: 30px;
+}
+.menu
+{
+    margin-top: 26px;
+}
+.getStartedBIN
+{
+    background-color: rgb(165, 102, 8);
+    border-radius: 28px;
+    -moz-border-radius: 28px;
+    -webkit-border-radius: 28px;
+    text-decoration: none;
+    color: rgb(163, 132, 132);
+    padding: 10px 20px;
+    margin-top: 20px;
+    display: inline-block;
+    font-size: 17px;
+    float:right;
+}
+.menu li:hover{
+    color: rgb(252, 206, 4);
+}
 
-    <br><br>ENTER PASSWORD: <input id='pass' type='password' placeholder='Enter password🤫' style="width: 740px;"/>
-    <input type="checkbox"  id="myCheckbox1" onclick="myFunction()" style="width:40px; height:40px; position: fixed;">
-    <label for="myCheckbox1" style="position: fixed;"><img src="./IMG/eye.png" /></label>
+.center-video{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
 
-  
-         <br><br><button onclick="encrypt()" class ="B" style="width: 900px; padding-top: 12px; padding-bottom: 12px;"><b>ENCRYPT 🔒</b></button>
+.column-3
+{
+    float: left;
+    padding-left: 285px;
+}
 
-    <br><br>RESULT 🛡️<br><span id='result'></span>
+#feature-section{
+    padding-top: 30px;
+    background-color: rgb(189, 250, 161);
+    height: 580px;
+}
 
-    <br><br>SECRET KEY 🔑 <input id='secret' type='text' placeholder='Enter the Result✨' style="width: 882px;"/>
-    
-    <br><br><button onclick="decrypt()" class ="B" style="width: 900px;  padding-top: 12px; padding-bottom: 12px;"><b>DECRYPT 🔓</b></button>
+.feature-section-title{
+width: 70%;
+text-align: center;
+font-weight: 200;
+line-height: 1.5em;
+font-size: 40px;
+margin: auto;
+padding-bottom: 30px;
+}
 
-    <br><br>DECODED TEXT 🌟 <br><span id="decrypted"></span><br></h4>
-</div>
-           
-                
-            </div>
-        </div>
-    </div>
-    <div>
-        <footer id="for-copyright-practice">
-          Copyright &copy 2024
-        </footer>
-      </div>
-</body>
-</html>
+.feature-content{
+    margin: auto;
+    width: 80%;
+    text-align: center;
+    padding-left: 30px;
+}
+
+.feature-content .column-3 img{
+    width: 25px;
+    height: 50px;
+
+}
+
+.feature-content .column3 h3{
+    text-align: center;
+}
+
+.feature-content .column3{
+    padding: 10px;
+    width: 30%;
+}
+
+.icons a{
+    padding-left: 30px;
+    padding-right: 30px;
+    color: black;
+}
+
+#for-copyright-home{
+    clear: both;
+    text-align: center;
+    font-size: 18px;
+    bottom: 0;
+    width: 100%;
+    position: fixed; 
+    text-decoration-color: rgb(0, 0, 0);
+    background-color: rgb(205, 255, 236);
+    padding-top: 11px;
+    padding-bottom: 11px;
+}
+
+#for-copyright-aboutus{
+    clear: both;
+    text-align: center;
+    font-size: 18px;
+    bottom: 0;
+    width: 100%;
+    position: fixed; 
+    text-decoration-color: rgb(0, 0, 0);
+    background-color: rgb(205, 255, 236);
+    padding-top: 11px;
+    padding-bottom: 11px;
+}
+
+.IMG-me{
+    width: 50px;
+    height: 100px;
+    align-items: center;
+}    
