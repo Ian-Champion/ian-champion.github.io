@@ -1,173 +1,141 @@
-$(function(){
+header
+{
+    height: 80px;
+    background-color: rgb(202, 162, 162);
+}
+#header-container
+{
+    width: 85%;
+    margin: auto;
+}
+.col-3
+{
+    width: 20%;
+    float: left;
+}
+.col-4
+{
+    width: 60%;
+    float: left;
+}
+body{
+    background-color: black;
+    margin: 0;
+}
+.menu li
+{
+    list-style-type: none;
+    display: inline;
+    font-size: 1.3em;
+    color: black;
+    padding-right: 30px;
+}
+.menu
+{
+    margin-top: 26px;
+}
+.getStartedBIN
+{
+    background-color: rgb(165, 102, 8);
+    border-radius: 28px;
+    -moz-border-radius: 28px;
+    -webkit-border-radius: 28px;
+    text-decoration: none;
+    color: rgb(163, 132, 132);
+    padding: 10px 20px;
+    margin-top: 20px;
+    display: inline-block;
+    font-size: 17px;
+    float:right;
+}
+.menu li:hover{
+    color: rgb(252, 206, 4);
+}
 
-	var body = $('body'),
-		stage = $('#stage'),
-		back = $('a.back');
+.center-video{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
 
-	/* Step 1 */
+.column-3
+{
+    float: left;
+    padding-left: 285px;
+}
 
-	$('#step1 .encrypt').click(function(){
-		body.attr('class', 'encrypt');
+#feature-section{
+    padding-top: 30px;
+    background-color: rgb(189, 250, 161);
+    height: 580px;
+}
 
-		// Go to step 2
-		step(2);
-	});
+.feature-section-title{
+width: 70%;
+text-align: center;
+font-weight: 200;
+line-height: 1.5em;
+font-size: 40px;
+margin: auto;
+padding-bottom: 30px;
+}
 
-	$('#step1 .decrypt').click(function(){
-		body.attr('class', 'decrypt');
-		step(2);
-	});
+.feature-content{
+    margin: auto;
+    width: 80%;
+    text-align: center;
+    padding-left: 30px;
+}
 
+.feature-content .column-3 img{
+    width: 25px;
+    height: 50px;
 
-	/* Step 2 */
+}
 
+.feature-content .column3 h3{
+    text-align: center;
+}
 
-	$('#step2 .button').click(function(){
-		// Trigger the file browser dialog
-		$(this).parent().find('input').click();
-	});
+.feature-content .column3{
+    padding: 10px;
+    width: 30%;
+}
 
+.icons a{
+    padding-left: 30px;
+    padding-right: 30px;
+    color: black;
+}
 
-	// Set up events for the file inputs
+#for-copyright-home{
+    clear: both;
+    text-align: center;
+    font-size: 18px;
+    bottom: 0;
+    width: 100%;
+    position: fixed; 
+    text-decoration-color: rgb(0, 0, 0);
+    background-color: rgb(205, 255, 236);
+    padding-top: 11px;
+    padding-bottom: 11px;
+}
 
-	var file = null;
+#for-copyright-aboutus{
+    clear: both;
+    text-align: center;
+    font-size: 18px;
+    bottom: 0;
+    width: 100%;
+    position: fixed; 
+    text-decoration-color: rgb(0, 0, 0);
+    background-color: rgb(205, 255, 236);
+    padding-top: 11px;
+    padding-bottom: 11px;
+}
 
-	$('#step2').on('change', '#encrypt-input', function(e){
-
-		// Has a file been selected?
-
-		if(e.target.files.length!=1){
-			alert('Please select a file to encrypt!');
-			return false;
-		}
-
-		file = e.target.files[0];
-
-		if(file.size > 1024*1024){
-			alert('Please choose files smaller than 1mb, otherwise you may crash your browser. \nThis is a known issue. See the tutorial.');
-			return;
-		}
-
-		step(3);
-	});
-
-	$('#step2').on('change', '#decrypt-input', function(e){
-
-		if(e.target.files.length!=1){
-			alert('Please select a file to decrypt!');
-			return false;
-		}
-
-		file = e.target.files[0];
-		step(3);
-	});
-
-
-	/* Step 3 */
-
-
-	$('a.button.process').click(function(){
-
-		var input = $(this).parent().find('input[type=password]'),
-			a = $('#step4 a.download'),
-			password = input.val();
-
-		input.val('');
-
-		if(password.length<5){
-			alert('Please choose a longer password!');
-			return;
-		}
-
-		// The HTML5 FileReader object will allow us to read the 
-		// contents of the	selected file.
-
-		var reader = new FileReader();
-
-		if(body.hasClass('encrypt')){
-
-			// Encrypt the file!
-
-			reader.onload = function(e){
-
-				// Use the CryptoJS library and the AES cypher to encrypt the 
-				// contents of the file, held in e.target.result, with the password
-
-				var encrypted = CryptoJS.AES.encrypt(e.target.result, password);
-
-				// The download attribute will cause the contents of the href
-				// attribute to be downloaded when clicked. The download attribute
-				// also holds the name of the file that is offered for download.
-
-				a.attr('href', 'data:application/octet-stream,' + encrypted);
-				a.attr('download', file.name + '.encrypted');
-
-				step(4);
-			};
-
-			// This will encode the contents of the file into a data-uri.
-			// It will trigger the onload handler above, with the result
-
-			reader.readAsDataURL(file);
-		}
-		else {
-
-			// Decrypt it!
-
-			reader.onload = function(e){
-
-				var decrypted = CryptoJS.AES.decrypt(e.target.result, password)
-										.toString(CryptoJS.enc.Latin1);
-
-				if(!/^data:/.test(decrypted)){
-					alert("Invalid pass phrase or file! Please try again.");
-					return false;
-				}
-
-				a.attr('href', decrypted);
-				a.attr('download', file.name.replace('.encrypted',''));
-
-				step(4);
-			};
-
-			reader.readAsText(file);
-		}
-	});
-
-
-	/* The back button */
-
-
-	back.click(function(){
-
-		// Reinitialize the hidden file inputs,
-		// so that they don't hold the selection 
-		// from last time
-
-		$('#step2 input[type=file]').replaceWith(function(){
-			return $(this).clone();
-		});
-
-		step(1);
-	});
-
-
-	// Helper function that moves the viewport to the correct step div
-
-	function step(i){
-
-		if(i == 1){
-			back.fadeOut();
-		}
-		else{
-			back.fadeIn();
-		}
-
-		// Move the #stage div. Changing the top property will trigger
-		// a css transition on the element. i-1 because we want the
-		// steps to start from 1:
-
-		stage.css('top',(-(i-1)*100)+'%');
-	}
-
-});
+.IMG-me{
+    width: 50px;
+    height: 100px;
+    align-items: center;
+}   
